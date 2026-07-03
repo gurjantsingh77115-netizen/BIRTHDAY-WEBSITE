@@ -1,0 +1,1020 @@
+/* ============================================
+   BIRTHDAYVERSE - MAIN STYLESHEET
+   ============================================ */
+
+/* Root Variables */
+:root {
+    /* Primary Colors */
+    --primary-purple: #6b21a8;
+    --primary-black: #0f0f0f;
+    --primary-neon-blue: #00d4ff;
+    
+    /* Secondary Colors */
+    --secondary-gold: #ffd700;
+    --secondary-white: #ffffff;
+    --secondary-pink: #ff1493;
+    --secondary-violet: #c084fc;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, #6b21a8 0%, #0f0f0f 100%);
+    --gradient-neon: linear-gradient(135deg, #00d4ff 0%, #6b21a8 100%);
+    --gradient-warm: linear-gradient(135deg, #ffd700 0%, #ff1493 100%);
+    
+    /* Fonts */
+    --font-display: 'Playfair Display', serif;
+    --font-main: 'Poppins', sans-serif;
+    --font-secondary: 'Montserrat', sans-serif;
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --spacing-2xl: 4rem;
+    
+    /* Transitions */
+    --transition-fast: 0.3s ease-in-out;
+    --transition-normal: 0.6s ease-in-out;
+    --transition-slow: 1s ease-in-out;
+}
+
+/* ============================================
+   RESET & BASE STYLES
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-main);
+    background: var(--gradient-primary);
+    color: var(--secondary-white);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* ============================================
+   LOADING SCREEN
+   ============================================ */
+
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: fadeOut 0.6s ease-in-out 2.4s forwards;
+}
+
+.loading-screen.hidden {
+    display: none;
+}
+
+.loading-container {
+    text-align: center;
+}
+
+.logo-animation h1 {
+    font-family: var(--font-display);
+    font-size: 4rem;
+    color: var(--primary-neon-blue);
+    margin-bottom: var(--spacing-lg);
+    animation: glow 2s ease-in-out infinite;
+    text-shadow: 0 0 20px var(--primary-neon-blue);
+}
+
+.progress-bar {
+    width: 300px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: var(--spacing-lg) 0;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--gradient-neon);
+    width: 0%;
+    animation: progressBar 2s ease-in-out forwards;
+}
+
+.loading-text {
+    font-size: 1.2rem;
+    color: var(--secondary-white);
+    margin-top: var(--spacing-md);
+    opacity: 0.8;
+}
+
+/* ============================================
+   MAIN CONTAINER & SECTIONS
+   ============================================ */
+
+.main-container {
+    min-height: 100vh;
+    opacity: 1;
+    transition: opacity var(--transition-normal);
+}
+
+.main-container.hidden {
+    display: none;
+}
+
+section {
+    min-height: 100vh;
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+section.hidden {
+    display: none;
+}
+
+/* ============================================
+   WELCOME SCREEN
+   ============================================ */
+
+.welcome-screen {
+    background: var(--gradient-primary);
+    position: relative;
+}
+
+.animated-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+#backgroundCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.welcome-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    animation: slideUp 0.8s ease-in-out;
+}
+
+.welcome-title {
+    font-family: var(--font-display);
+    font-size: 5rem;
+    margin-bottom: var(--spacing-md);
+    background: linear-gradient(135deg, var(--primary-neon-blue), var(--secondary-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeInScale 1s ease-in-out;
+}
+
+.welcome-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-xl);
+    color: var(--secondary-white);
+    opacity: 0.9;
+    animation: fadeIn 1s ease-in-out 0.3s forwards;
+    opacity: 0;
+}
+
+.welcome-buttons {
+    display: flex;
+    gap: var(--spacing-lg);
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeIn 1s ease-in-out 0.6s forwards;
+    opacity: 0;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+.btn {
+    padding: var(--spacing-md) var(--spacing-xl);
+    border: none;
+    border-radius: 50px;
+    font-family: var(--font-main);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary {
+    background: var(--gradient-neon);
+    color: var(--primary-black);
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0, 212, 255, 0.5);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--secondary-white);
+    border: 2px solid var(--primary-neon-blue);
+}
+
+.btn-secondary:hover {
+    background: var(--primary-neon-blue);
+    color: var(--primary-black);
+    transform: translateY(-3px);
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* ============================================
+   COUNTDOWN TIMER
+   ============================================ */
+
+.countdown-screen {
+    background: var(--gradient-primary);
+}
+
+.countdown-container {
+    text-align: center;
+    animation: slideUp 0.8s ease-in-out;
+}
+
+.countdown-container h2 {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    margin-bottom: var(--spacing-2xl);
+    color: var(--primary-neon-blue);
+}
+
+.countdown-display {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--spacing-lg);
+    max-width: 800px;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-lg);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    border: 2px solid var(--primary-neon-blue);
+    backdrop-filter: blur(10px);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.countdown-value {
+    font-family: var(--font-secondary);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-neon-blue);
+    line-height: 1;
+}
+
+.countdown-label {
+    font-size: 0.9rem;
+    color: var(--secondary-white);
+    margin-top: var(--spacing-xs);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ============================================
+   MUSIC CONTROLS
+   ============================================ */
+
+.music-controls {
+    position: fixed;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    background: rgba(0, 0, 0, 0.5);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    z-index: 100;
+}
+
+.music-btn {
+    background: none;
+    border: none;
+    color: var(--primary-neon-blue);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    padding: var(--spacing-xs);
+}
+
+.music-btn:hover {
+    transform: scale(1.2);
+    color: var(--secondary-pink);
+}
+
+.volume-slider {
+    width: 120px;
+    height: 4px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--primary-neon-blue);
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--primary-neon-blue);
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+/* ============================================
+   PHOTO GALLERY
+   ============================================ */
+
+.photo-gallery {
+    background: var(--gradient-primary);
+}
+
+.photo-gallery h2,
+.gift-box-section h2,
+.birthday-letter h2,
+.cake-section h2,
+.memory-timeline h2,
+.quotes-section h2,
+.share-section h2 {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    margin-bottom: var(--spacing-xl);
+    color: var(--primary-neon-blue);
+    text-align: center;
+}
+
+.gallery-container {
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: var(--spacing-xl);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    aspect-ratio: 1;
+    cursor: pointer;
+    background: rgba(0, 212, 255, 0.1);
+    border: 2px solid var(--primary-neon-blue);
+    transition: all var(--transition-fast);
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-normal);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-controls {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-lg);
+}
+
+.gallery-btn {
+    background: var(--primary-neon-blue);
+    color: var(--primary-black);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.gallery-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
+}
+
+/* ============================================
+   GIFT BOX
+   ============================================ */
+
+.gift-box-section {
+    background: var(--gradient-primary);
+}
+
+.gift-box {
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+    margin-bottom: var(--spacing-lg);
+    perspective: 1000px;
+}
+
+.gift-box-top,
+.gift-box-body,
+.gift-box-ribbon {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.gift-box-body {
+    background: linear-gradient(135deg, var(--secondary-pink), var(--secondary-gold));
+    border-radius: 10px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    animation: giftBoxBounce 0.8s ease-in-out infinite;
+}
+
+.gift-box-top {
+    background: var(--secondary-gold);
+    border-radius: 5px;
+    width: 90%;
+    height: 30%;
+    top: -15%;
+    left: 5%;
+    box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.gift-box-ribbon {
+    width: 20px;
+    background: var(--secondary-pink);
+    left: 50%;
+    margin-left: -10px;
+}
+
+.gift-message {
+    max-width: 600px;
+    padding: var(--spacing-xl);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    border: 2px solid var(--primary-neon-blue);
+    animation: slideUp 0.8s ease-in-out;
+}
+
+.gift-message p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--secondary-white);
+}
+
+.gift-message.hidden {
+    display: none;
+}
+
+/* ============================================
+   BIRTHDAY LETTER
+   ============================================ */
+
+.birthday-letter {
+    background: var(--gradient-primary);
+}
+
+.letter-content {
+    max-width: 700px;
+    padding: var(--spacing-xl);
+    background: rgba(107, 33, 168, 0.3);
+    border: 2px solid var(--primary-neon-blue);
+    border-radius: 15px;
+    min-height: 300px;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--secondary-white);
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* ============================================
+   CAKE SECTION
+   ============================================ */
+
+.cake-section {
+    background: var(--gradient-primary);
+}
+
+.cake-container {
+    width: 100%;
+    max-width: 600px;
+    height: 400px;
+    margin-bottom: var(--spacing-xl);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    border: 2px solid var(--primary-neon-blue);
+}
+
+#cakeCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 20px;
+}
+
+/* ============================================
+   FIREWORKS SECTION
+   ============================================ */
+
+.fireworks-section {
+    background: var(--gradient-primary);
+    padding: 0;
+}
+
+#fireworksCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* ============================================
+   CONFETTI CANVAS
+   ============================================ */
+
+.confetti-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 50;
+}
+
+/* ============================================
+   MEMORY TIMELINE
+   ============================================ */
+
+.memory-timeline {
+    background: var(--gradient-primary);
+}
+
+.timeline-container {
+    max-width: 800px;
+    width: 100%;
+}
+
+.timeline-item {
+    display: flex;
+    margin-bottom: var(--spacing-xl);
+    opacity: 0;
+    animation: slideInLeft 0.8s ease-in-out forwards;
+}
+
+.timeline-item:nth-child(odd) {
+    animation: slideInRight 0.8s ease-in-out forwards;
+}
+
+.timeline-item:nth-child(1) { animation-delay: 0.1s; }
+.timeline-item:nth-child(2) { animation-delay: 0.2s; }
+.timeline-item:nth-child(3) { animation-delay: 0.3s; }
+.timeline-item:nth-child(4) { animation-delay: 0.4s; }
+
+.timeline-dot {
+    width: 20px;
+    height: 20px;
+    background: var(--primary-neon-blue);
+    border-radius: 50%;
+    margin-right: var(--spacing-lg);
+    flex-shrink: 0;
+    margin-top: 5px;
+    box-shadow: 0 0 20px var(--primary-neon-blue);
+}
+
+.timeline-content {
+    background: rgba(255, 255, 255, 0.05);
+    padding: var(--spacing-lg);
+    border-radius: 15px;
+    border-left: 2px solid var(--primary-neon-blue);
+}
+
+.timeline-date {
+    font-size: 0.9rem;
+    color: var(--secondary-gold);
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+}
+
+.timeline-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+.timeline-description {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+}
+
+/* ============================================
+   QUOTES SECTION
+   ============================================ */
+
+.quotes-section {
+    background: var(--gradient-primary);
+}
+
+.quote-display {
+    max-width: 700px;
+    text-align: center;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+.quote-text {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xl);
+    color: var(--primary-neon-blue);
+    min-height: 120px;
+    line-height: 1.8;
+}
+
+/* ============================================
+   SHARE SECTION
+   ============================================ */
+
+.share-section {
+    background: var(--gradient-primary);
+}
+
+.share-buttons {
+    display: flex;
+    gap: var(--spacing-lg);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.share-btn {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.share-btn.whatsapp {
+    background: #25D366;
+    color: white;
+}
+
+.share-btn.instagram {
+    background: linear-gradient(135deg, #fd5949, #d6249f, #285AEB);
+    color: white;
+}
+
+.share-btn.telegram {
+    background: #0088cc;
+    color: white;
+}
+
+.share-btn.facebook {
+    background: #1877F2;
+    color: white;
+}
+
+.share-btn.copy {
+    background: var(--primary-neon-blue);
+    color: var(--primary-black);
+}
+
+.share-btn:hover {
+    transform: translateY(-5px) scale(1.1);
+}
+
+/* ============================================
+   ENDING SCREEN
+   ============================================ */
+
+.ending-screen {
+    background: var(--gradient-primary);
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.ending-screen h2 {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    margin-bottom: var(--spacing-lg);
+    color: var(--primary-neon-blue);
+}
+
+.ending-screen p {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-xl);
+    color: var(--secondary-white);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        text-shadow: 0 0 20px var(--primary-neon-blue);
+    }
+    50% {
+        text-shadow: 0 0 40px var(--primary-neon-blue);
+    }
+}
+
+@keyframes progressBar {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes giftBoxBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+    section {
+        padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .welcome-title {
+        font-size: 3rem;
+    }
+
+    .welcome-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .welcome-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .countdown-display {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-md);
+    }
+
+    .countdown-value {
+        font-size: 2rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: var(--spacing-md);
+    }
+
+    .photo-gallery h2,
+    .gift-box-section h2,
+    .birthday-letter h2,
+    .cake-section h2,
+    .memory-timeline h2,
+    .quotes-section h2,
+    .share-section h2 {
+        font-size: 2rem;
+    }
+
+    .quote-text {
+        font-size: 1.5rem;
+    }
+
+    .share-buttons {
+        gap: var(--spacing-md);
+    }
+
+    .share-btn {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .music-controls {
+        width: calc(100% - var(--spacing-lg) * 2);
+        left: var(--spacing-lg);
+        right: var(--spacing-lg);
+        justify-content: space-around;
+    }
+
+    .volume-slider {
+        width: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --spacing-lg: 1.5rem;
+        --spacing-xl: 2rem;
+        --spacing-2xl: 2.5rem;
+    }
+
+    .welcome-title {
+        font-size: 2rem;
+    }
+
+    .countdown-display {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-sm);
+    }
+
+    .countdown-item {
+        padding: var(--spacing-md);
+    }
+
+    .countdown-value {
+        font-size: 1.5rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .timeline-item {
+        flex-direction: column;
+    }
+
+    .timeline-dot {
+        margin-right: 0;
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.hidden {
+    display: none !important;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--primary-neon-blue), var(--secondary-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
